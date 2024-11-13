@@ -18,6 +18,16 @@ jobs:
           
           
   # This workflow contains a single job called "build"
+  test:
+     runs-on: ubuntu-latest
+     steps:
+
+        - uses: actions/checkout@v4
+        - name: SonarQube Quality Gate Check
+          uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
+          with:
+          # Location of the scanner metadata report file
+            scanMetadataReportFile: .scannerwork/report-task.txt  
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -39,9 +49,4 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-
-      - name: SonarQube Quality Gate Check
-        uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
-        with:
-          # Location of the scanner metadata report file
-          scanMetadataReportFile: .scannerwork/report-task.txt    
+      
